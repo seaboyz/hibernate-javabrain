@@ -9,8 +9,8 @@ import com.webdev.dto.UserDetails;
 public class App {
     public static void main(String[] args) {
         UserDetails user = new UserDetails();
-        user.setUserId(1);
-        user.setUserName("seaboyz");
+        user.setUserId(3);
+        user.setUserName("third user");
 
         // create a session factory
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
