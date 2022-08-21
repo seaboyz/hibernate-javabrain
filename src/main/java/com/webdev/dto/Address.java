@@ -1,15 +1,21 @@
 package com.webdev.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
 
     private String street;
-    private String city;
-    private String state;
-    private String zip;
 
+    @Column(name = "city_name")
+    private String city;
+
+    @Column(name = "state_name")
+    private String state;
+
+    @Column(name = "zip_code")
+    private String zip;
 
     public String getStreet() {
         return this.street;
@@ -43,5 +49,4 @@ public class Address {
         this.zip = zip;
     }
 
-    
 }

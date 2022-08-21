@@ -2,13 +2,14 @@ package com.webdev.dto;
 
 import java.sql.Date;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
@@ -27,10 +28,38 @@ public class UserDetails {
     private Date joinedDate;
 
     @Embedded
-    private Address address;
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "home_street_name")),
+            @AttributeOverride(name = "city", column = @Column(name = "home_city_name")),
+            @AttributeOverride(name = "state", column = @Column(name = "home_state_name")),
+            @AttributeOverride(name = "zip", column = @Column(name = "home_zip_code")) })
+    private Address homeAddress;
 
-    @Lob
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride(name = "street", column = @Column(name = "work_street_name")),
+            @AttributeOverride(name = "city", column = @Column(name = "work_city_name")),
+            @AttributeOverride(name = "state", column = @Column(name = "work_state_name")),
+            @AttributeOverride(name = "zip", column = @Column(name = "work_zip_code")) })
+    private Address officeAddress;
+
     private String description;
+
+    public Address getHomeAddress() {
+        return this.homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
+
+    public Address getOfficeAddress() {
+        return this.officeAddress;
+    }
+
+    public void setOfficeAddress(Address officeAddress) {
+        this.officeAddress = officeAddress;
+    }
 
     public Date getJoinedDate() {
         return this.joinedDate;
@@ -38,14 +67,6 @@ public class UserDetails {
 
     public void setJoinedDate(Date joinedDate) {
         this.joinedDate = joinedDate;
-    }
-
-    public Address getAddress() {
-        return this.address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public String getDescription() {
