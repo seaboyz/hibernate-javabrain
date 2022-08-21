@@ -17,7 +17,7 @@ public class UserDetails {
     @Column(name = "user_id")
     private int userId;
 
-    @Transient
+    @Column(name = "user_name")
     private String userName;
 
     @Column(name = "joined_date")

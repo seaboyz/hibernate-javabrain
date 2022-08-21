@@ -1,7 +1,5 @@
 package com.webdev;
 
-
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -27,6 +25,15 @@ public class App {
         session.save(user);
         // commit transaction
         session.getTransaction().commit();
+        // close session
+        session.close();
 
+        user = null;
+
+        session = sessionFactory.openSession();
+        session.beginTransaction();
+        user = (UserDetails) session.get(UserDetails.class, 1);
+
+        System.out.println("User Name: " + user.getUserName());
     }
 }
