@@ -15,6 +15,9 @@ public class App {
         user.setAddress("First User's address");
         user.setDescription("First User's description");
 
+        UserDetails user2 = new UserDetails();
+        user2.setUserName("second user");
+
         // create a session factory
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         // create a session
@@ -23,17 +26,11 @@ public class App {
         session.beginTransaction();
         // save the object
         session.save(user);
+        session.save(user2);
         // commit transaction
         session.getTransaction().commit();
         // close session
         session.close();
 
-        user = null;
-
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-        user = (UserDetails) session.get(UserDetails.class, 1);
-
-        System.out.println("User Name: " + user.getUserName());
     }
 }
