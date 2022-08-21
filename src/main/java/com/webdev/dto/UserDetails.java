@@ -7,16 +7,13 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.CollectionId;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "user_details")
@@ -35,11 +32,8 @@ public class UserDetails {
 
     private String description;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "user_id"))
-    // @GenericGenerator(name = "hilo-gen", strategy = "hilo")
-    // @GenericGenerator(name = "hilo-gen", strategy = "increment")
-    // @CollectionId(columns = { @Column(name = "address_id") }, generator = "hili-gen", type = @Type(type = "long"))
     private Collection<Address> listOfAddresses = new ArrayList<Address>();
 
     public Collection<Address> getListOfAddresses() {

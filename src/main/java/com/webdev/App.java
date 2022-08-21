@@ -38,5 +38,11 @@ public class App {
         session.getTransaction().commit();
         session.close();
 
+        user = null;
+        session = sessionFactory.openSession();
+        user = (UserDetails) session.get(UserDetails.class, 1);
+        session.close();
+        System.out.println(user.getListOfAddresses().size());
+
     }
 }
