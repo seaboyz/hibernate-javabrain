@@ -4,15 +4,23 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.webdev.dto.Address;
 import com.webdev.dto.UserDetails;
 
 public class App {
     public static void main(String[] args) {
         UserDetails user = new UserDetails();
+
+        Address address = new Address();
+        address.setCity("New York");
+        address.setState("New York");
+        address.setStreet("123 Main Street");
+        address.setZip("10001");
+        user.setAddress(address);
         user.setUserId(1);
         user.setUserName("first user");
         user.setJoinedDate(new java.sql.Date(new java.util.Date().getTime()));
-        user.setAddress("First User's address");
+
         user.setDescription("First User's description");
 
         UserDetails user2 = new UserDetails();
