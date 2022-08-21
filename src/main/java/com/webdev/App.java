@@ -1,5 +1,7 @@
 package com.webdev;
 
+
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -9,8 +11,11 @@ import com.webdev.dto.UserDetails;
 public class App {
     public static void main(String[] args) {
         UserDetails user = new UserDetails();
-        user.setUserId(3);
-        user.setUserName("third user");
+        user.setUserId(1);
+        user.setUserName("first user");
+        user.setJoinedDate(new java.sql.Date(new java.util.Date().getTime()));
+        user.setAddress("First User's address");
+        user.setDescription("First User's description");
 
         // create a session factory
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
