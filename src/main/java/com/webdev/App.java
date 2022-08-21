@@ -11,19 +11,20 @@ public class App {
     public static void main(String[] args) {
         UserDetails user = new UserDetails();
 
-        Address homAddress = new Address();
-        homAddress.setStreet("123 Main Street");
-        homAddress.setCity("Anytown");
-        homAddress.setState("CA");
-        homAddress.setZip("12345");
-        user.setHomeAddress(homAddress);
+        Address address1 = new Address();
+        address1.setStreet("123 Main Street");
+        address1.setCity("Anytown");
+        address1.setState("CA");
+        address1.setZip("12345");
 
-        Address officeAddress = new Address();
-        officeAddress.setStreet("456 Office Street");
-        officeAddress.setCity("Anytown");
-        officeAddress.setState("CA");
-        officeAddress.setZip("12345");
-        user.setOfficeAddress(officeAddress);
+        Address address2 = new Address();
+        address2.setStreet("456 Office Street");
+        address2.setCity("Anytown");
+        address2.setState("CA");
+        address2.setZip("12345");
+
+        user.getListOfAddresses().add(address1);
+        user.getListOfAddresses().add(address2);
 
         user.setUserId(1);
         user.setUserName("first user");

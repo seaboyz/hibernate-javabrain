@@ -1,23 +1,29 @@
 package com.webdev.dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.CollectionId;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 @Entity
 @Table(name = "user_details")
 public class UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private int userId;
 
@@ -27,38 +33,21 @@ public class UserDetails {
     @Column(name = "joined_date")
     private Date joinedDate;
 
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "street", column = @Column(name = "home_street_name")),
-            @AttributeOverride(name = "city", column = @Column(name = "home_city_name")),
-            @AttributeOverride(name = "state", column = @Column(name = "home_state_name")),
-            @AttributeOverride(name = "zip", column = @Column(name = "home_zip_code")) })
-    private Address homeAddress;
-
-    @Embedded
-    @AttributeOverrides({
-            @AttributeOverride(name = "street", column = @Column(name = "work_street_name")),
-            @AttributeOverride(name = "city", column = @Column(name = "work_city_name")),
-            @AttributeOverride(name = "state", column = @Column(name = "work_state_name")),
-            @AttributeOverride(name = "zip", column = @Column(name = "work_zip_code")) })
-    private Address officeAddress;
-
     private String description;
 
-    public Address getHomeAddress() {
-        return this.homeAddress;
+    @ElementCollection
+    @JoinTable(name = "user_address", joinColumns = @JoinColumn(name = "user_id"))
+    // @GenericGenerator(name = "hilo-gen", strategy = "hilo")
+    // @GenericGenerator(name = "hilo-gen", strategy = "increment")
+    // @CollectionId(columns = { @Column(name = "address_id") }, generator = "hili-gen", type = @Type(type = "long"))
+    private Collection<Address> listOfAddresses = new ArrayList<Address>();
+
+    public Collection<Address> getListOfAddresses() {
+        return this.listOfAddresses;
     }
 
-    public void setHomeAddress(Address homeAddress) {
-        this.homeAddress = homeAddress;
-    }
-
-    public Address getOfficeAddress() {
-        return this.officeAddress;
-    }
-
-    public void setOfficeAddress(Address officeAddress) {
-        this.officeAddress = officeAddress;
+    public void setListOfAddresses(Collection<Address> listOfAddresses) {
+        this.listOfAddresses = listOfAddresses;
     }
 
     public Date getJoinedDate() {
