@@ -3,7 +3,7 @@ package com.webdev.dto;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "user_details")
 public class UserDetails {
 
     @Id
