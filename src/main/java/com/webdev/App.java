@@ -16,7 +16,9 @@ public class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("from UserDetails where userId > 5");
+        Query query = session.createQuery("from UserDetails");
+        query.setFirstResult(5);
+        query.setMaxResults(3);
 
         List<UserDetails> users = (List<UserDetails>) query.list();
 
