@@ -1,8 +1,11 @@
 package com.webdev;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import com.webdev.dto.UserDetails;
 
@@ -13,25 +16,16 @@ public class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        UserDetails user = (UserDetails) session.get(UserDetails.class, 1);
-        System.out.println(user.getUserName());
+        Query query = session.createQuery("from UserDetails where userId > 5");
+
+        List<UserDetails> users = (List<UserDetails>) query.list();
 
         session.getTransaction().commit();
         session.close();
 
-        user.setUserName("Updated User Name After Session Close");
-
-        session = sessionFactory.openSession();
-        session.beginTransaction();
-
-        session.update(user);
-
-        user.setUserName("Updated User Name After Session Open");
-
-        session.getTransaction().commit();
-        session.close();
-
-        System.out.println(user.getUserName());
+        for (UserDetails user : users) {
+            System.out.println(user.getUserId() + ": " + user.getUserName());
+        }
 
     }
 }
