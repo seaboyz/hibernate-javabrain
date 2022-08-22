@@ -15,21 +15,19 @@ public class App {
 
         Vehicle vehicle = new Vehicle();
         vehicle.setVehicleName("car");
-        vehicle.getUsers().add(user);
         user.getVehicles().add(vehicle);
 
         Vehicle vehicle2 = new Vehicle();
         vehicle2.setVehicleName("bike");
-        vehicle2.getUsers().add(user);
         user.getVehicles().add(vehicle2);
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(user);
-        session.save(vehicle);
-        session.save(vehicle2);
+        session.persist(user);
+        // session.save(vehicle);
+        // session.save(vehicle2);
 
         session.getTransaction().commit();
         session.close();
