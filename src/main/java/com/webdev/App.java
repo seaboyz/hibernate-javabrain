@@ -7,8 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.Query;
 
-import com.webdev.dto.UserDetails;
-
 public class App {
     public static void main(String[] args) {
 
@@ -16,9 +14,9 @@ public class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("select userName from UserDetails");
-        query.setFirstResult(5);
-        query.setMaxResults(3);
+        Query query = session.createQuery("select userName from UserDetails where userId > ?1 and userId < ?2");
+        query.setParameter(1, 1);
+        query.setParameter(2, 3);
 
         List<String> users = (List<String>) query.list();
 
