@@ -15,14 +15,13 @@ public class App {
 
         Vehicle vehicle = new Vehicle();
         vehicle.setVehicleName("car");
-        vehicle.setUser(user);
+        vehicle.getUsers().add(user);
+        user.getVehicles().add(vehicle);
 
         Vehicle vehicle2 = new Vehicle();
         vehicle2.setVehicleName("bike");
-        vehicle2.setUser(user);
-
-        user.addVehicle(vehicle);
-        user.addVehicle(vehicle2);
+        vehicle2.getUsers().add(user);
+        user.getVehicles().add(vehicle2);
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();

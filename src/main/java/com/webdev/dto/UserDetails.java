@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +23,7 @@ public class UserDetails {
     @Column(name = "user_name")
     private String userName;
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany
     private Collection<Vehicle> vehicles = new ArrayList<Vehicle>();
 
     public Collection<Vehicle> getVehicles() {
@@ -50,11 +48,6 @@ public class UserDetails {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public void addVehicle(Vehicle vehicle) {
-        this.vehicles.add(vehicle);
-        vehicle.setUser(this);
     }
 
 }
