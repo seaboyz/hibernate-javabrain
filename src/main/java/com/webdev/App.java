@@ -4,34 +4,25 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
-import com.webdev.dto.FourWheeler;
-import com.webdev.dto.TwoWheeler;
-import com.webdev.dto.Vehicle;
+import com.webdev.dto.UserDetails;
 
 public class App {
     public static void main(String[] args) {
 
-        Vehicle vehicle = new Vehicle();
-        vehicle.setVehicleName("car");
-
-        TwoWheeler bike = new TwoWheeler();
-        bike.setVehicleName("bike");
-        bike.setSteeringHandle("Bike Steering Handle");
-
-        FourWheeler car = new FourWheeler();
-        car.setVehicleName("Porsche");
-        car.setSteeringWheel("Porsche Steering Wheel");
+        UserDetails user = new UserDetails();
+        user.setUserName("Test User");
 
         SessionFactory sessionFactory = new Configuration().configure().buildSessionFactory();
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(vehicle);
-        session.save(bike);
-        session.save(car);
+        session.save(user);
+        user.setUserName("Updated User");
+        user.setUserName("Updated User Agian");
 
         session.getTransaction().commit();
         session.close();
 
+        user.setUserName("Updated User Again After Session Closed");
     }
 }
