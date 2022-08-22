@@ -12,6 +12,8 @@
 
         <mapping class="com.webdev.dto.UserDetails" />
         <mapping class="com.webdev.dto.Vehicle" />
+        <mapping class="com.webdev.dto.TwoWheeler" />
+        <mapping class="com.webdev.dto.FourWheeler" />
 
 
     </session-factory>
