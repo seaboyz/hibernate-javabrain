@@ -11,6 +11,7 @@
         <property name="show_sql">true</property>
 
         <mapping class="com.webdev.dto.UserDetails" />
+        <mapping class="com.webdev.dto.Vehicle" />
 
 
     </session-factory>
