@@ -16,17 +16,17 @@ public class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("from UserDetails");
+        Query query = session.createQuery("select userName from UserDetails");
         query.setFirstResult(5);
         query.setMaxResults(3);
 
-        List<UserDetails> users = (List<UserDetails>) query.list();
+        List<String> users = (List<String>) query.list();
 
         session.getTransaction().commit();
         session.close();
 
-        for (UserDetails user : users) {
-            System.out.println(user.getUserId() + ": " + user.getUserName());
+        for (String user : users) {
+            System.out.println(user);
         }
 
     }
