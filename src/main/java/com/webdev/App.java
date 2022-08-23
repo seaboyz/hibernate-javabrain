@@ -17,17 +17,23 @@ public class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Criteria criteria = session.createCriteria(UserDetails.class);
-        criteria.add(Restrictions.eq("userName", "User 10"));
-
-        List<UserDetails> users = (List<UserDetails>) criteria.list();
+        UserDetails user = session.get(UserDetails.class, 1);
+        user.setUserName("Updated User Name");
 
         session.getTransaction().commit();
         session.close();
 
-        for (UserDetails user : users) {
-            System.out.println(user.getUserName());
-        }
+        // session2
+        Session session2 = sessionFactory.openSession();
+        session2.beginTransaction();
+
+        UserDetails user2 = session2.get(UserDetails.class, 1);
+
+        session2.getTransaction().commit();
+        session2.close();
+
+        System.out.println(user.getUserName());
+        System.out.println(user2.getUserName());
 
     }
 }

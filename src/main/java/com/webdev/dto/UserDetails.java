@@ -1,5 +1,6 @@
 package com.webdev.dto;
 
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +10,12 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.)
 @NamedQuery(name = "UserDetails.byId", query = "from UserDetails where userId = ?1")
 @NamedNativeQuery(name = "UserDetails.byName", query = "select * from UserDetails where userName = ?1", resultClass = UserDetails.class)
 @Table(name = "user_details")
