@@ -2,10 +2,13 @@ package com.webdev;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.query.Query;
+import org.hibernate.criterion.Restrictions;
+
+import com.webdev.dto.UserDetails;
 
 public class App {
     public static void main(String[] args) {
@@ -14,17 +17,16 @@ public class App {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        Query query = session.createQuery("select userName from UserDetails where userId > ?1 and userId < ?2");
-        query.setParameter(1, 1);
-        query.setParameter(2, 3);
+        Criteria criteria = session.createCriteria(UserDetails.class);
+        criteria.add(Restrictions.eq("userName", "User 10"));
 
-        List<String> users = (List<String>) query.list();
+        List<UserDetails> users = (List<UserDetails>) criteria.list();
 
         session.getTransaction().commit();
         session.close();
 
-        for (String user : users) {
-            System.out.println(user);
+        for (UserDetails user : users) {
+            System.out.println(user.getUserName());
         }
 
     }
