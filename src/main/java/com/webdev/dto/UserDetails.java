@@ -15,7 +15,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 @Entity
 @Cacheable
-@Cache(usage = CacheConcurrencyStrategy.)
+@Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "UserDetails.byId", query = "from UserDetails where userId = ?1")
 @NamedNativeQuery(name = "UserDetails.byName", query = "select * from UserDetails where userName = ?1", resultClass = UserDetails.class)
 @Table(name = "user_details")
